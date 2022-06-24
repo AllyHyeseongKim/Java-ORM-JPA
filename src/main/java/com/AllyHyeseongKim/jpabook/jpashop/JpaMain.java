@@ -1,10 +1,12 @@
-package hellojpa;
+package com.AllyHyeseongKim.jpabook.jpashop;
+
+import com.AllyHyeseongKim.jpabook.jpashop.domain.Member;
+import com.AllyHyeseongKim.jpabook.jpashop.domain.Order;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -15,17 +17,11 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
+
         try {
 
-//            Member findMember = em.find(Member.class, 1L);
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(5)
-                    .setMaxResults(8)
-                    .getResultList();
-
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+            Order order = em.find(Order.class, 1L);
+            Long memberId = order.getMemberId();
 
             tx.commit();
         } catch (Exception e) {
